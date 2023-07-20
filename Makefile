@@ -1,4 +1,5 @@
 fs=$(shell find dist -name '*.tar.bz2')
+ANACONDA_USERNAME=coml
 PYTHON_NUMPY_VER=\
 	3.8:1.20\
 	3.9:1.20\
