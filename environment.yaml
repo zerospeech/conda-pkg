@@ -1,0 +1,10 @@
+name: zrc-toolkit
+channels:
+  - coml
+dependencies:
+    - python >=3.8
+    - zerospeech-benchmarks >=0.9.3
+    - zerospeech-tde >=2.0.3
+    - zerospeech-libriabx >=1.0.5
+    - zerospeech-libriabx2 >=0.9.7
+    - virtual-dataset >=1.0.0
