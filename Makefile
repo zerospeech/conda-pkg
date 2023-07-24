@@ -13,8 +13,7 @@ ifeq (, $(shell which anaconda))
 endif
 
 
-
-build-all: virtual-dataset zerospeech-libriabx zerospeech-libriabx2 zerospeech-tde zerospeech-benchmarks
+build-all: virtual-dataset zerospeech-tde zerospeech-libriabx zerospeech-libriabx2 zerospeech-benchmarks
 
 upload: upload-pkg upload-env
 
@@ -24,36 +23,26 @@ zerospeech-benchmarks:
 virtual-dataset:
 	conda build $@ -c conda-forge --output-folder dist
 
-
 zerospeech-libriabx:
-	$(foreach PYVER, $(LIBRISPEECH_VER), \
-		conda build $@/${PYVER} -c conda-forge -c pytorch -c ${ANACONDA_USERNAME} --output-folder dist;\
-	)
-
-zrc-tst:
-	@echo "$@"
-	conda build zerospeech-libriabx/test -c conda-forge -c pytorch -c ${ANACONDA_USERNAME} --output-folder dist
+	conda build $@ -c conda-forge -c pytorch -c ${ANACONDA_USERNAME} --output-folder dist
 
 zerospeech-libriabx2:
-	$(foreach PYVER, $(LIBRISPEECH2_VER), \
-		conda build $@/${PYVER} -c conda-forge -c pytorch -c ${ANACONDA_USERNAME} --output-folder dist;\
-	)
+	conda build $@ -c conda-forge -c pytorch -c ${ANACONDA_USERNAME} --output-folder dist
 
 zerospeech-tde:
 	conda build $@ --output-folder dist
 
 upload-env:
 	@echo "pushing virtualenv environment.yml"
+	anaconda -t "${ANACONDA_TOKEN}" upload -u "${ANACONDA_USERNAME}" zrc-toolkit-env/environment.yaml
 
-
-#anaconda -t "${ANACONDA_TOKEN}" upload -u "${ANACONDA_USERNAME}" "${fs[@]}" --force
 upload-pkg:
-	@echo "${fs}"
+	@echo "Uploading: ${fs}"
+	anaconda -t "${ANACONDA_TOKEN}" upload -u "${ANACONDA_USERNAME}" ${fs} --force
 
 clean:
 	rm -rf dist
+	conda build purge
 
-#	conda build purge
 
-
-.PHONY: zerospeech-benchmarks upload virtual-dataset zerospeech-tde zerospeech-libriabx zerospeech-libriabx2 upload-pkg upload-env build-all
+.PHONY: zerospeech-benchmarks virtual-dataset zerospeech-tde zerospeech-libriabx zerospeech-libriabx2 upload-pkg upload-env upload build-all

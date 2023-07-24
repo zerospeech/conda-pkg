@@ -1,5 +1,7 @@
 name: zrc-toolkit
 channels:
+  - pytorch
+  - conda-forge
   - coml
 dependencies:
     - python >=3.8

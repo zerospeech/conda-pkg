@@ -25,19 +25,20 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - python 3.8
+    - python
     - setuptools >=45
     - setuptools-scm >=6.2
     - cython
-    - numpy 1.20
+    - numpy
     - pip
   run:
-    - python 3.8
-    - pytorch::pytorch 1.13.1
-    - pytorch::torchaudio 0.13.1
-    - conda-forge::progressbar2
-    - coml::virtual-dataset
-    - { { pin_compatible('numpy') } }
+    - python
+    - progressbar2
+    - pytorch
+    - torchaudio
+    - virtual-dataset
+    - {{ pin_compatible('numpy') }}
+
 
 test:
   imports:
@@ -47,6 +48,9 @@ test:
     - libri-abx --help
   requires:
     - pip
+    # torchaudio is picky about the distribution of pytorch it uses. In fact,
+    # even using the pytorch of the correct version from conda-forge yields a
+    # linker error. Let's avoid that in testing here.
     - pytorch::pytorch 1.13.1
     - pytorch::torchaudio 0.13.1
 
@@ -59,3 +63,4 @@ about:
 extra:
   recipe-maintainers:
     - spro
+    - coml

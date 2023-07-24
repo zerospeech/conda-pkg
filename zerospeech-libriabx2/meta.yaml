@@ -14,7 +14,6 @@ build:
   entry_points:
     - zrc-abx2 = zrc_abx2.eval_ABX:main
   script: {{ PYTHON }} -m pip install . -vv
-  noarch: python
   number: 0
 
 requirements:
@@ -58,3 +57,8 @@ about:
   license_file:
     - LICENCE.txt
     - zrc_abx2/cpc/LICENSE
+
+extra:
+  recipe-maintainers:
+    - spro
+    - coml
