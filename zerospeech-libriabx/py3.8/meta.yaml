@@ -25,19 +25,19 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - python
+    - python 3.8
     - setuptools >=45
     - setuptools-scm >=6.2
     - cython
-    - numpy
+    - numpy 1.20
     - pip
   run:
-    - python
-    - pytorch
-    - progressbar2
-    - torchaudio
-    - virtual-dataset
-    - {{ pin_compatible('numpy') }}
+    - python 3.8
+    - pytorch::pytorch 1.13.1
+    - pytorch::torchaudio 0.13.1
+    - conda-forge::progressbar2
+    - coml::virtual-dataset
+    - { { pin_compatible('numpy') } }
 
 test:
   imports:
