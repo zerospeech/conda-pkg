@@ -27,7 +27,7 @@ zerospeech-libriabx:
 	conda build $@ -c conda-forge -c pytorch -c ${ANACONDA_USERNAME} --output-folder dist
 
 zerospeech-libriabx2:
-	conda build $@ -c conda-forge -c pytorch -c ${ANACONDA_USERNAME} --output-folder dist
+	conda build $@ -c pytorch -c conda-forge -c ${ANACONDA_USERNAME} --output-folder dist
 
 zerospeech-tde:
 	conda build $@ --output-folder dist
